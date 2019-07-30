@@ -86,7 +86,7 @@
 
 
 import React,{Component} from 'react';
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
 
 class App extends Component 
@@ -94,30 +94,95 @@ class App extends Component
   constructor(props)
   {
     super(props);
-    this.todos = [
-      {
-        id:1,
-        note:'Wake Up',
-        span:'aaa',
-      },
-      {
-        id:2,
-        note:'Make Coffee',
-        span:'bbb',
-      },
-      {
-        id:3,
-        note:'Drink Coffee',
-        span:'ccc',
-      },
-      {
-        id:4,
-        note:'Study',
-        span:'adddaa',
-      },
-    ];
+    this.state = {
+      todos:[
+          {
+              id:1,
+              note:'Wake Up',
+              span:'aaa',
+            },
+            {
+              id:2,
+              note:'Make Coffee',
+              span:'bbb',
+            },
+            {
+              id:3,
+              note:'Drink Coffee',
+              span:'ccc',
+            },
+            {
+              id:4,
+              note:'Study',
+              span:'adddaa',
+            },
+           
+      ],
+      noteInputValue:'',//for input value
+      noteInputTitleValue:'',//for input value of title
+    }
+    // this.todos = [
+    //   {
+    //     id:1,
+    //     note:'Wake Up',
+    //     // span:'aaa',
+    //   },
+    //   {
+    //     id:2,
+    //     note:'Make Coffee',
+    //     //span:'bbb',
+    //   },
+    //   {
+    //     id:3,
+    //     note:'Drink Coffee',
+    //     //span:'ccc',
+    //   },
+    //   {
+    //     id:4,
+    //     note:'Study',
+    //     //span:'adddaa',
+    //   },
+    // ];
   }
-
+  // ===for on change for title===
+  handlerInputNoteTitleOnchange = (e) =>
+  {
+    this.setState({noteInputTitleValue : e.target.value});
+  }
+  
+  // ===for on change when enter value in text====
+  handlerInputNoteOnchange = (e) =>
+  {
+    // console.log(e);
+    this.setState({noteInputValue : e.target.value});
+    
+    //this.setState() using  fun we change value in app(list) means we ask and req to react change things for us
+    
+  }
+//=== for when click it we want to add note===
+handlerAddInputOnclick = (e) =>
+{
+    e.preventDefault();//when click on button not want to jump
+    var newNote = {
+      id:Date.now(),//create id using time stamp
+      note:this.state.noteInputValue,//add newly created note in newNote var
+      span:this.state.noteInputTitleValue,
+    };
+    var newNotes = [newNote,...this.state.todos];//add whole list in newNotes var
+    this.setState({
+      todos:newNotes,//add all list in main var todos
+      noteInputValue:'',//when we create one note we want to clear text feild value we want blank
+    });
+}
+// ==for delete the notes====
+removeNoteOnclick = (noteId) => 
+{
+  var todos = this.state.todos;//we get todos list for filter
+  var filterTodos = todos.filter(function(items){
+    return items.id != noteId;
+  });
+  this.setState({todos:filterTodos});
+}
   render()
   {
     return (
@@ -131,9 +196,16 @@ class App extends Component
             </div>
             <div className="row text-center items">
               {
-                this.todos.map(function(todo){
+                // this.state.todos.map(function(todo){
+                this.state.todos.map((todo) => {
+                  // we want this for i thats why we use arrownotation bcz in simple fun this= undefine nd after arrow notaion this = app
                   return(
+                   
                     <div className="col-12" key={todo.id}>
+                      <i className="far fa-times-circle note-remove" onClick={(e) => {this.removeNoteOnclick(todo.id)}}></i>
+                      {/* we use arrow notation here bcz we want to delete particular note so we want id so we want this 
+                and uing arrow notation we get this
+                */}
                     <p>{todo.note}</p>
                     <span>{todo.span}</span>
                     </div>
@@ -153,9 +225,9 @@ class App extends Component
             </div>
             <form className="form-inline">
                 
-                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" placeholder="Note"/>
-
-                <button type="submit" className="btn btn-primary mb-2 col-3">Add</button>
+                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputTitleValue} onChange={this.handlerInputNoteTitleOnchange}  placeholder="Note title"/>
+                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputValue} onChange={this.handlerInputNoteOnchange}  placeholder="Note"/>
+                <button type="submit" className="btn btn-primary mb-2 col-3" onClick={this.handlerAddInputOnclick}>Add</button>
             </form>
         </div>
     </div>
