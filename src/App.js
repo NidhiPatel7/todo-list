@@ -97,57 +97,35 @@ class App extends Component
     super(props);
     this.state = {
       todos:[
-          {
-              id:1,
-              note:'Wake Up',
-              span:'aaa',
-              status:0,
-            },
-            {
-              id:2,
-              note:'Make Coffee',
-              span:'bbb',
-              status:0,
-            },
-            {
-              id:3,
-              note:'Drink Coffee',
-              span:'ccc',
-              status:0,
-            },
-            {
-              id:4,
-              note:'Study',
-              span:'adddaa',
-              status:1,
-            },
+          // {
+          //     id:1,
+          //     note:'Wake Up',
+          //     span:'at 6:00',
+          //     status:0,
+          //   },
+          //   {
+          //     id:2,
+          //     note:'Make Coffee',
+          //     span:'at 6:30',
+          //     status:0,
+          //   },
+          //   {
+          //     id:3,
+          //     note:'study',
+          //     span:'at 7:30',
+          //     status:0,
+          //   },
+          //   {
+          //     id:4,
+          //     note:'sleep',
+          //     span:'at 11:30',
+          //     status:1,
+          //   },
            
       ],
       noteInputValue:'',//for input value
       noteInputTitleValue:'',//for input value of title
     }
-    // this.todos = [
-    //   {
-    //     id:1,
-    //     note:'Wake Up',
-    //     // span:'aaa',
-    //   },
-    //   {
-    //     id:2,
-    //     note:'Make Coffee',
-    //     //span:'bbb',
-    //   },
-    //   {
-    //     id:3,
-    //     note:'Drink Coffee',
-    //     //span:'ccc',
-    //   },
-    //   {
-    //     id:4,
-    //     note:'Study',
-    //     //span:'adddaa',
-    //   },
-    // ];
   }
   // ===for on change for title===
   handlerInputNoteTitleOnchange = (e) =>
@@ -260,9 +238,8 @@ updateStatus = (noteId,statusNew) =>
                 </div> */}
             </div>
             <form className="form-inline">
-                
-                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputTitleValue} onChange={this.handlerInputNoteTitleOnchange}  placeholder="Note title"/>
-                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputValue} onChange={this.handlerInputNoteOnchange}  placeholder="Note"/>
+                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputValue} onChange={this.handlerInputNoteOnchange}  placeholder="Note title"/>
+                <input type="text" className="form-control mb-2 mr-sm-2 col-8" id="inlineFormInputName2" value={this.state.noteInputTitleValue} onChange={this.handlerInputNoteTitleOnchange}  placeholder="Note "/>
                 <button type="submit" className="btn btn-primary mb-2 col-3" onClick={this.handlerAddInputOnclick}>Add</button>
             </form>
         </div>
