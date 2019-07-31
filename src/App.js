@@ -86,7 +86,8 @@
 
 
 import React,{Component} from 'react';
-// import logo from './logo.svg';
+import frameImage from './Frame.png';
+
 import './App.css';
 
 class App extends Component 
@@ -100,21 +101,25 @@ class App extends Component
               id:1,
               note:'Wake Up',
               span:'aaa',
+              status:0,
             },
             {
               id:2,
               note:'Make Coffee',
               span:'bbb',
+              status:0,
             },
             {
               id:3,
               note:'Drink Coffee',
               span:'ccc',
+              status:0,
             },
             {
               id:4,
               note:'Study',
               span:'adddaa',
+              status:1,
             },
            
       ],
@@ -179,21 +184,41 @@ removeNoteOnclick = (noteId) =>
 {
   var todos = this.state.todos;//we get todos list for filter
   var filterTodos = todos.filter(function(items){
-    return items.id != noteId;
+    return items.id !== noteId;
   });
   this.setState({todos:filterTodos});
 }
+// === for check and uncheck the notes ====
+updateStatus = (noteId,statusNew) => 
+{
+
+  
+  var todos = this.state.todos;//get a list
+  var indexTodo = todos.findIndex(function(todo){//we find value from array based on index and we find index based on id
+    return todo.id === noteId;
+  });
+
+
+  todos[indexTodo].status = statusNew;//we change status in particular value
+
+  this.setState({todos});//modify list  after  change status 
+
+}
+
+// updateStatus = (id,status) => {
+
+// }
   render()
   {
     return (
       <div className="wrap">
         
         <div className="container">
-            <div className="row title">
-                <div className="col-12 text-center">
-                    <h1 className="">To Do List React Js</h1>
-                </div>
+            <div className="row imgRow">
+                    <h1 className="title">My Day</h1>
+                    <img className="imgClass" src={frameImage} alt="img"/>
             </div>
+          
             <div className="row text-center items">
               {
                 // this.state.todos.map(function(todo){
@@ -201,13 +226,24 @@ removeNoteOnclick = (noteId) =>
                   // we want this for i thats why we use arrownotation bcz in simple fun this= undefine nd after arrow notaion this = app
                   return(
                    
-                    <div className="col-12" key={todo.id}>
+                    <div className="col-12 flex" key={todo.id}>
+
                       <i className="far fa-times-circle note-remove" onClick={(e) => {this.removeNoteOnclick(todo.id)}}></i>
                       {/* we use arrow notation here bcz we want to delete particular note so we want id so we want this 
                 and uing arrow notation we get this
                 */}
-                    <p>{todo.note}</p>
+                {
+                   (todo.status === 1) ? <del> <p className="blur">{todo.note}</p></del> :  <p>{todo.note}</p>
+                }
+                   
                     <span>{todo.span}</span>
+                    
+                    {
+                      
+                      (todo.status === 1) ?   <i className="fas fa-check-square click" onClick={(e) => {this.updateStatus(todo.id,0)}}></i> : <i className="fas fa-square click " onClick={(e) => {this.updateStatus(todo.id,1)}}></i> 
+                    }
+                    {/* <i className="fas fa-square click" ></i> */}
+                    
                     </div>
                   )
                 })

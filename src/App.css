@@ -1,18 +1,90 @@
 @import 'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css';
 @import 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.9.0/css/all.css';
+body 
+{
+    background: linear-gradient(179.98deg, #4754C3 6.79%, rgba(155, 71, 195, 0.69) 88.52%);
+}
 .wrap 
 {
     max-width: 26em;
     margin: auto;
+    margin-top: 5em;
+    height: 100vh;
+    width: 100vw;
+}
+.imgRow 
+{
+    position: relative;
 }
 .title 
 {
-    color: white;
-    background-color: #7F00FF;
-    /* rgba(127,0,255,1) */
-    padding: 1em 0;
+    /* color: white; */
+    color: transparent;
+    text-shadow: 0 0 3px rgba(255,255,255,0.7);
+    position: absolute;
+    position: absolute;
+    top: 50%;
+    left: 46%;
+    transform: translate(-50%, -50%);
+    box-sizing: border-box;
+    z-index: 1;
+}
+.imgClass 
+{
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: blur(0.2em);
+    border-radius: 1em;
+}
+span 
+{
+    color: gainsboro;
 }
 .container 
 {
     background-color: whitesmoke;
+    box-shadow: -1px -1px 11px #FBFBFB, 8px 7px 11px rgba(255, 255, 255, 0.7);
+    border-radius: 1em;
 }
+.blur 
+{
+    color: transparent;
+    text-shadow: 0 0 3px rgba(0,0,0,0.7);
+}
+.flex 
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    margin: 0.5em 0;
+    /* border-bottom: 1px solid darkgrey; */
+}
+p 
+{
+    margin-bottom: 0;
+}
+.click 
+{
+    color: rgba(1,1,1,0.3);
+}
+.check {
+    position: absolute;
+    right: 3%;
+    top: 12%;
+
+}
+.checkNone 
+{
+    display: none
+}
+.items
+{
+    padding: 2em 0;
+}
+/* .flex:nth-child(4n+1)
+{
+    background-color: aqua;
+    color: white;
+} */
